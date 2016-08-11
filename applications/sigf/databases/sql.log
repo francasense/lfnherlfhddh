@@ -1,0 +1,182 @@
+timestamp: 2016-08-10T19:17:53.017374
+CREATE TABLE auth_user(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    first_name CHAR(128),
+    last_name CHAR(128),
+    email CHAR(512),
+    password CHAR(512),
+    registration_key CHAR(512),
+    reset_password_key CHAR(512),
+    registration_id CHAR(512)
+);
+success!
+timestamp: 2016-08-10T19:17:53.029038
+CREATE TABLE auth_group(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    role CHAR(512),
+    description TEXT
+);
+success!
+timestamp: 2016-08-10T19:17:53.049669
+CREATE TABLE auth_membership(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    user_id INTEGER REFERENCES auth_user (id) ON DELETE CASCADE  ,
+    group_id INTEGER REFERENCES auth_group (id) ON DELETE CASCADE  
+);
+success!
+timestamp: 2016-08-10T19:17:53.061012
+CREATE TABLE auth_permission(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    group_id INTEGER REFERENCES auth_group (id) ON DELETE CASCADE  ,
+    name CHAR(512),
+    table_name CHAR(512),
+    record_id INTEGER
+);
+success!
+timestamp: 2016-08-10T19:17:53.081766
+CREATE TABLE auth_event(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    time_stamp TIMESTAMP,
+    client_ip CHAR(512),
+    user_id INTEGER REFERENCES auth_user (id) ON DELETE CASCADE  ,
+    origin CHAR(512),
+    description TEXT
+);
+success!
+timestamp: 2016-08-10T19:17:53.092044
+CREATE TABLE auth_cas(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    user_id INTEGER REFERENCES auth_user (id) ON DELETE CASCADE  ,
+    created_on TIMESTAMP,
+    service CHAR(512),
+    ticket CHAR(512),
+    renew CHAR(1)
+);
+success!
+timestamp: 2016-08-10T19:24:13.403889
+CREATE TABLE auth_user(
+    id SERIAL PRIMARY KEY,
+    first_name VARCHAR(128),
+    last_name VARCHAR(128),
+    email VARCHAR(512),
+    password VARCHAR(512),
+    registration_key VARCHAR(512),
+    reset_password_key VARCHAR(512),
+    registration_id VARCHAR(512)
+);
+success!
+timestamp: 2016-08-10T19:24:13.450554
+CREATE TABLE auth_group(
+    id SERIAL PRIMARY KEY,
+    role VARCHAR(512),
+    description TEXT
+);
+success!
+timestamp: 2016-08-10T19:24:13.463829
+CREATE TABLE auth_membership(
+    id SERIAL PRIMARY KEY,
+    user_id INTEGER REFERENCES auth_user (id) ON DELETE CASCADE  ,
+    group_id INTEGER REFERENCES auth_group (id) ON DELETE CASCADE  
+);
+success!
+timestamp: 2016-08-10T19:24:13.476789
+CREATE TABLE auth_permission(
+    id SERIAL PRIMARY KEY,
+    group_id INTEGER REFERENCES auth_group (id) ON DELETE CASCADE  ,
+    name VARCHAR(512),
+    table_name VARCHAR(512),
+    record_id INTEGER
+);
+success!
+timestamp: 2016-08-10T19:24:13.489564
+CREATE TABLE auth_event(
+    id SERIAL PRIMARY KEY,
+    time_stamp TIMESTAMP,
+    client_ip VARCHAR(512),
+    user_id INTEGER REFERENCES auth_user (id) ON DELETE CASCADE  ,
+    origin VARCHAR(512),
+    description TEXT
+);
+success!
+timestamp: 2016-08-10T19:24:13.512489
+CREATE TABLE auth_cas(
+    id SERIAL PRIMARY KEY,
+    user_id INTEGER REFERENCES auth_user (id) ON DELETE CASCADE  ,
+    created_on TIMESTAMP,
+    service VARCHAR(512),
+    ticket VARCHAR(512),
+    renew CHAR(1)
+);
+success!
+timestamp: 2016-08-10T19:27:09.006795
+CREATE TABLE t_setor(
+    id SERIAL PRIMARY KEY,
+    f_name VARCHAR(512)
+);
+faked!
+timestamp: 2016-08-10T19:27:09.009158
+CREATE TABLE t_setor_archive(
+    id SERIAL PRIMARY KEY,
+    f_name VARCHAR(512),
+    current_record INTEGER REFERENCES t_setor (id) ON DELETE CASCADE  
+);
+faked!
+timestamp: 2016-08-10T19:28:34.132388
+ALTER TABLE auth_user ADD f_setor INTEGER REFERENCES t_setor (id) ON DELETE CASCADE  ;
+faked!
+timestamp: 2016-08-10T19:28:34.132884
+ALTER TABLE auth_user ADD f_cpf VARCHAR(512);
+faked!
+success!
+timestamp: 2016-08-10T19:30:53.466964
+ALTER TABLE auth_user DROP COLUMN f_setor;
+faked!
+timestamp: 2016-08-10T19:30:53.467509
+ALTER TABLE auth_user DROP COLUMN f_cpf;
+faked!
+success!
+timestamp: 2016-08-10T19:30:53.490161
+CREATE TABLE t_tipo(
+    id SERIAL PRIMARY KEY,
+    f_descricao VARCHAR(512),
+    is_active CHAR(1),
+    created_on TIMESTAMP,
+    created_by INTEGER REFERENCES auth_user (id) ON DELETE CASCADE  ,
+    modified_on TIMESTAMP,
+    modified_by INTEGER REFERENCES auth_user (id) ON DELETE CASCADE  
+);
+faked!
+timestamp: 2016-08-10T19:34:46.577744
+CREATE TABLE mytable(
+    id SERIAL PRIMARY KEY,
+    myfield VARCHAR(512)
+);
+success!
+timestamp: 2016-08-10T19:38:16.205892
+CREATE TABLE t_departamento(
+    id SERIAL PRIMARY KEY,
+    nome VARCHAR(512)
+);
+success!
+timestamp: 2016-08-10T19:39:48.297782
+ALTER TABLE t_departamento ADD f_name VARCHAR(512);
+timestamp: 2016-08-10T19:39:48.299002
+ALTER TABLE t_departamento DROP COLUMN nome;
+success!
+timestamp: 2016-08-10T19:42:14.160876
+ALTER TABLE auth_user ADD f_departamento INTEGER REFERENCES t_departamento (id) ON DELETE CASCADE  ;
+timestamp: 2016-08-10T19:42:14.162902
+ALTER TABLE auth_user ADD f_cpf VARCHAR(512);
+success!
+timestamp: 2016-08-10T19:45:11.314427
+CREATE TABLE t_time(
+    id SERIAL PRIMARY KEY,
+    f_nome VARCHAR(512),
+    f_qtd_jogadores INTEGER,
+    is_active CHAR(1),
+    created_on TIMESTAMP,
+    created_by INTEGER REFERENCES auth_user (id) ON DELETE CASCADE  ,
+    modified_on TIMESTAMP,
+    modified_by INTEGER REFERENCES auth_user (id) ON DELETE CASCADE  
+);
+success!
