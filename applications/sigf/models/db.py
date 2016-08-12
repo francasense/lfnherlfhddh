@@ -5,7 +5,7 @@ if request.global_settings.web2py_version < "2.14.1":
     raise HTTP(500, "Requires web2py 2.13.3 or newer")
 
 from gluon.contrib.appconfig import AppConfig
-
+#
 myconf = AppConfig(reload=True)
 ####
 if not request.env.web2py_runtime_gae:
