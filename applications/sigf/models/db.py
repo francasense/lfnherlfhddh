@@ -7,7 +7,7 @@ if request.global_settings.web2py_version < "2.14.1":
 from gluon.contrib.appconfig import AppConfig
 
 myconf = AppConfig(reload=True)
-
+####
 if not request.env.web2py_runtime_gae:
     # ---------------------------------------------------------------------
     # if NOT running on Google App Engine use SQLite or other DB
